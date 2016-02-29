@@ -1,7 +1,4 @@
 $(document).ready( function() {
-  $.getJSON('http://api.stackexchange.com/2.2/tags/html/top-answerers/all_time?site=stackoverflow', function(data){
-    console.log(data);
-  });
 	$('.unanswered-getter').submit( function(e){
 		e.preventDefault();
 		// zero out results if previous search has run
@@ -32,6 +29,13 @@ var showAnswerer = function(answerer) {
 	// Set the answerer properties in result
 	var answererElem = result.find('.answerer-name');
 	answererElem.text(answerer.user.display_name);
+
+	var reputation = result.find('.reputation');
+	reputation.text(answerer.user.reputation);
+
+	var answererLink = result.find('.pageLink a');
+	answererLink.attr('href', answerer.user.link);
+	answererLink.text(answerer.user.link);
 
 	return result;
 };
